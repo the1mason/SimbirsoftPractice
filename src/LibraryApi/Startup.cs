@@ -11,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LibraryApi.Middlewares;
+
 
 namespace LibraryApi
 {
@@ -41,7 +43,7 @@ namespace LibraryApi
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LibraryApi v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LibraryApi"));
             }
 
             app.UseHttpsRedirection();
@@ -49,6 +51,10 @@ namespace LibraryApi
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseLogging();
+
+            app.UseAuth();
 
             app.UseEndpoints(endpoints =>
             {
