@@ -28,9 +28,15 @@ namespace LibraryApi.Controllers
         public async Task<ActionResult<List<Models.HumanDto>>> GetHumans(bool authorsOnly = false, string query = null, int index = 0, int? count = null)
         {
             if (index < 0)
+            {
+                _logger.LogInformation($"[{DateTime.UtcNow}] {HttpContext.Connection.RemoteIpAddress} -> 400 (index < 0)");
                 return BadRequest("Index can't be lower, than 0");
+            }
             if (count < 1)
+            {
+                _logger.LogInformation($"[{DateTime.UtcNow}] {HttpContext.Connection.RemoteIpAddress} -> 400 (count < 1)");
                 return BadRequest("Count is a positive number. It can't be lower, than 1");
+            }
 
             try
             {
