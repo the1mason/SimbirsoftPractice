@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace LibraryApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class BooksController : ControllerBase
     {
