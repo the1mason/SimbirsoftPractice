@@ -15,6 +15,10 @@ namespace LibraryApi.Data
         /// </summary>
         public static List<Models.HumanDto> Humans { get; set; }
 
+        public static int LastBookId;
+        public static int LastHumanId;
+        public static int LastGenreId;
+
         static Storage()
         {
             Humans = new List<Models.HumanDto>
@@ -24,12 +28,14 @@ namespace LibraryApi.Data
                 new() { Id = 3, Name = "Богдан", Surname = "Богданов", Patronymic = "Богданович", Birthday = DateTime.Parse("03.03.2003")},
                 new() { Id = 4, Name = "Александр", Surname = "Александров", Patronymic = "Александрович", Birthday = DateTime.Parse("03.03.1903")},
             };
+            LastHumanId = 4;
             Genres = new List<Models.GenreDto>
             {
                 new() { Id = 1, Name = "Фантастика"},
                 new() { Id = 2, Name = "Детектив"},
                 new() { Id = 3, Name = "Классика"}
             };
+            LastGenreId = 3;
             Books = new List<Models.BookDto>
             {
                 new() { Id = 1, Title = "Фантастическая фантастика I", Genre = Genres[0], AuthorId = Humans[0].Id },
@@ -37,6 +43,7 @@ namespace LibraryApi.Data
                 new() { Id = 3, Title = "Детективный детектив", Genre = Genres[1], AuthorId = Humans[1].Id },
                 new() { Id = 4, Title = "Классическая классика", Genre = Genres[2], AuthorId = Humans[3].Id },
             };
+            LastBookId = 4;
         }
     }
 }

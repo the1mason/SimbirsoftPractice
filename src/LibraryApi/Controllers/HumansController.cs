@@ -44,7 +44,7 @@ namespace LibraryApi.Controllers
                 List<Models.HumanDto> result = Services.HumanService.Get(index, count, authorsOnly, query);
                 return result;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError($"[{DateTime.UtcNow}] {HttpContext.Connection.RemoteIpAddress} : Inner exception {ex.Message} in {ex.StackTrace}");
                 return StatusCode(500, "Server error: " + ex.Message);
@@ -52,13 +52,13 @@ namespace LibraryApi.Controllers
         }
 
         /// <summary>
-        /// 3.2
+        /// 3.2 - POST request for Humans
         /// </summary>
         /// <param name="human">new human to add</param>
         [HttpPost]
         public ActionResult<Models.HumanDto> AddHuman(Models.HumanDto human)
         {
-            if(string.IsNullOrWhiteSpace(human.Name))
+            if (string.IsNullOrWhiteSpace(human.Name))
             {
                 _logger.LogInformation($"[{DateTime.UtcNow}] {HttpContext.Connection.RemoteIpAddress} -> 400 (name is null)");
                 return BadRequest("Name can't be null");
@@ -79,9 +79,9 @@ namespace LibraryApi.Controllers
                 return StatusCode(500, "Server error: " + ex.Message);
             }
         }
-        
+
         /// <summary>
-        /// 3.3
+        /// 3.3 - DELETE request for Humans
         /// </summary>
         /// <param name="id">id of user to delete</param>
         [HttpDelete]
