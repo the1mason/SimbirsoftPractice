@@ -17,6 +17,13 @@ namespace LibraryApi.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// 3.1 3.1.1 3.1.2 3.1.3 - GET request for Humans
+        /// </summary>
+        /// <param name="authorsOnly">should return only authors?</param>
+        /// <param name="query">search query for name, surname and patronymic</param>
+        /// <param name="index">start index</param>
+        /// <param name="count">count of items returned</param>
         [HttpGet]
         public async Task<ActionResult<List<Models.HumanDto>>> GetHumans(bool authorsOnly = false, string query = null, int index = 0, int? count = null)
         {
