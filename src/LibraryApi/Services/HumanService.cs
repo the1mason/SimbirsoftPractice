@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryApi.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -38,5 +39,17 @@ namespace LibraryApi.Services
             }
             return result;
        }
+
+        public static HumanDto Add(HumanDto human)
+        {
+            human.Id = 1 + Data.Storage.Humans.OrderBy(x => x.Id).Last().Id;
+            Data.Storage.Humans.Add(human);
+            return human;
+        }
+
+        public static void Delete(int id)
+        {
+            Data.Storage.Humans.Remove(Data.Storage.Humans.First(x => x.Id == id));
+        }
     }
 }

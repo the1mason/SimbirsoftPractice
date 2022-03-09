@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace LibraryApi.Controllers
@@ -25,7 +26,7 @@ namespace LibraryApi.Controllers
         /// <param name="index">start index</param>
         /// <param name="count">count of items returned</param>
         [HttpGet]
-        public async Task<ActionResult<List<Models.HumanDto>>> GetHumans(bool authorsOnly = false, string query = null, int index = 0, int? count = null)
+        public ActionResult<List<Models.HumanDto>> GetHumans(bool authorsOnly = false, string query = null, int index = 0, int? count = null)
         {
             if (index < 0)
             {
@@ -44,6 +45,66 @@ namespace LibraryApi.Controllers
                 return result;
             }
             catch(Exception ex)
+            {
+                _logger.LogError($"[{DateTime.UtcNow}] {HttpContext.Connection.RemoteIpAddress} : Inner exception {ex.Message} in {ex.StackTrace}");
+                return StatusCode(500, "Server error: " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// 3.2
+        /// </summary>
+        /// <param name="human">new human to add</param>
+        [HttpPost]
+        public ActionResult<Models.HumanDto> AddHuman(Models.HumanDto human)
+        {
+            if(string.IsNullOrWhiteSpace(human.Name))
+            {
+                _logger.LogInformation($"[{DateTime.UtcNow}] {HttpContext.Connection.RemoteIpAddress} -> 400 (name is null)");
+                return BadRequest("Name can't be null");
+            }
+            if (string.IsNullOrWhiteSpace(human.Surname))
+            {
+                _logger.LogInformation($"[{DateTime.UtcNow}] {HttpContext.Connection.RemoteIpAddress} -> 400 (surname is null)");
+                return BadRequest("Surname can't be null");
+            }
+            try
+            {
+                Models.HumanDto result = Services.HumanService.Add(human);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"[{DateTime.UtcNow}] {HttpContext.Connection.RemoteIpAddress} : Inner exception {ex.Message} in {ex.StackTrace}");
+                return StatusCode(500, "Server error: " + ex.Message);
+            }
+        }
+        
+        /// <summary>
+        /// 3.3
+        /// </summary>
+        /// <param name="id">id of user to delete</param>
+        [HttpDelete]
+        public ActionResult DeleteHuman(int? id)
+        {
+            if (id == null)
+            {
+                _logger.LogInformation($"[{DateTime.UtcNow}] {HttpContext.Connection.RemoteIpAddress} -> 400 (id is null)");
+                return BadRequest("Id can't be null");
+            }
+
+            if (!Data.Storage.Humans.Any(x => x.Id == id))
+            {
+                _logger.LogInformation($"[{DateTime.UtcNow}] {HttpContext.Connection.RemoteIpAddress} -> 400 (wrong id)");
+                return BadRequest("Can't find human with id " + id);
+            }
+
+            try
+            {
+                Services.HumanService.Delete(Convert.ToInt32(id));
+                return NoContent();
+            }
+            catch (Exception ex)
             {
                 _logger.LogError($"[{DateTime.UtcNow}] {HttpContext.Connection.RemoteIpAddress} : Inner exception {ex.Message} in {ex.StackTrace}");
                 return StatusCode(500, "Server error: " + ex.Message);
