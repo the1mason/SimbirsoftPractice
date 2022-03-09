@@ -32,10 +32,10 @@ namespace LibraryApi.Data
             };
             Books = new List<Models.BookDto>
             {
-                new() { Id = 1, Title = "Фантастическая фантастика I", Genre = Genres[0], Author = Humans[0] },
-                new() { Id = 2, Title = "Фантастическая фантастика II", Genre = Genres[0], Author = Humans[0] },
-                new() { Id = 3, Title = "Детективный детектив", Genre = Genres[1], Author = Humans[1] },
-                new() { Id = 4, Title = "Классическая классика", Genre = Genres[2], Author = Humans[3] },
+                new() { Id = 1, Title = "Фантастическая фантастика I", Genre = Genres[0], AuthorId = Humans[0].Id },
+                new() { Id = 2, Title = "Фантастическая фантастика II", Genre = Genres[0], AuthorId = Humans[0].Id },
+                new() { Id = 3, Title = "Детективный детектив", Genre = Genres[1], AuthorId = Humans[1].Id },
+                new() { Id = 4, Title = "Классическая классика", Genre = Genres[2], AuthorId = Humans[3].Id },
             };
         }
     }
