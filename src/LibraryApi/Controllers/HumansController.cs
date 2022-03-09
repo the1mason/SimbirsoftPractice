@@ -19,7 +19,7 @@ namespace LibraryApi.Controllers
         }
 
         /// <summary>
-        /// 3.1 3.1.1 3.1.2 3.1.3 - GET request for Humans
+        /// 1.3.1 1.3.1.1 1.3.1.2 1.3.1.3 - GET request for Humans
         /// </summary>
         /// <param name="authorsOnly">should return only authors?</param>
         /// <param name="query">search query for name, surname and patronymic</param>
@@ -52,7 +52,7 @@ namespace LibraryApi.Controllers
         }
 
         /// <summary>
-        /// 3.2 - POST request for Humans
+        /// 1.3.2 - POST request for Humans
         /// </summary>
         /// <param name="human">new human to add</param>
         [HttpPost]
@@ -81,7 +81,7 @@ namespace LibraryApi.Controllers
         }
 
         /// <summary>
-        /// 3.3 - DELETE request for Humans
+        /// 1.3.3 - DELETE request for Humans
         /// </summary>
         /// <param name="id">id of user to delete</param>
         [HttpDelete]

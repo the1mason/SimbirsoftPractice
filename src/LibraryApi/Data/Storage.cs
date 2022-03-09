@@ -6,14 +6,19 @@ namespace LibraryApi.Data
     public static class Storage
     {
         /// <summary>
-        /// 2.3 - список книг
+        /// 1.2.3 - Books
         /// </summary>
         public static List<Models.BookDto> Books { get; set; }
         public static List<Models.GenreDto> Genres { get; set; }
         /// <summary>
-        /// 2.3 - список людей
+        /// 1.2.3 - Humans
         /// </summary>
         public static List<Models.HumanDto> Humans { get; set; }
+
+        /// <summary>
+        /// 2.1.2
+        /// </summary>
+        public static List<Models.LibraryCard> Cards { get; set; }
 
         public static int LastBookId;
         public static int LastHumanId;

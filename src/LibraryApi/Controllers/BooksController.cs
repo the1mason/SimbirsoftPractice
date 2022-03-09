@@ -18,7 +18,7 @@ namespace LibraryApi.Controllers
         }
 
         /// <summary>
-        /// 4.1 4.1.1 4.1.2
+        /// 1.4.1 1.4.1.1 1.4.1.2
         /// </summary>
         /// <param name="index"></param>
         /// <param name="count"></param>
@@ -51,7 +51,7 @@ namespace LibraryApi.Controllers
         }
 
         /// <summary>
-        /// 4.2
+        /// 1.4.2
         /// </summary>
         /// <param name="book"></param>
         [HttpPost]
@@ -92,7 +92,7 @@ namespace LibraryApi.Controllers
         }
 
         /// <summary>
-        /// 4.3
+        /// 1.4.3
         /// </summary>
         /// <param name="id"></param>
         [HttpDelete]

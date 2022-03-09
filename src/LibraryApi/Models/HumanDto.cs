@@ -1,9 +1,10 @@
 ﻿using System;
-/// <summary>
-/// 2.1
-/// </summary>
+
 namespace LibraryApi.Models
 {
+    /// <summary>
+    /// 1.2.1
+    /// </summary>
     public class HumanDto
     {
         public int Id { get; set; }

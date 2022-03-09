@@ -1,5 +1,8 @@
 ﻿namespace LibraryApi.Models
 {
+    /// <summary>
+    /// 1.2.2
+    /// </summary>
     public class BookDto
     {
         public int Id { get; set; }
