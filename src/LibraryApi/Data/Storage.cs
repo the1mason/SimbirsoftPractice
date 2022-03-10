@@ -23,6 +23,7 @@ namespace LibraryApi.Data
         public static int LastBookId;
         public static int LastHumanId;
         public static int LastGenreId;
+        public static int LastCardId;
 
         static Storage()
         {
@@ -49,6 +50,9 @@ namespace LibraryApi.Data
                 new() { Id = 4, Title = "Классическая классика", Genre = Genres[2], AuthorId = Humans[3].Id },
             };
             LastBookId = 4;
+
+            Cards = new();
+            LastCardId = 0;
         }
     }
 }

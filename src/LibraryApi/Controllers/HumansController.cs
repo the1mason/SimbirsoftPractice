@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -92,17 +93,15 @@ namespace LibraryApi.Controllers
                 _logger.LogInformation($"[{DateTime.UtcNow}] {HttpContext.Connection.RemoteIpAddress} -> 400 (id is null)");
                 return BadRequest("Id can't be null");
             }
-
-            if (!Data.Storage.Humans.Any(x => x.Id == id))
-            {
-                _logger.LogInformation($"[{DateTime.UtcNow}] {HttpContext.Connection.RemoteIpAddress} -> 400 (wrong id)");
-                return BadRequest("Can't find human with id " + id);
-            }
-
             try
             {
                 Services.HumanService.Delete(Convert.ToInt32(id));
                 return NoContent();
+            }
+            catch (InvalidOperationException)
+            {
+                _logger.LogInformation($"[{DateTime.UtcNow}] {HttpContext.Connection.RemoteIpAddress} -> 400 (bad id)");
+                return BadRequest("Wrong human id");
             }
             catch (Exception ex)
             {
