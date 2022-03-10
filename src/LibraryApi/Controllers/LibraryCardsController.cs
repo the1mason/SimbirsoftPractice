@@ -26,11 +26,11 @@ namespace LibraryApi.Controllers
         /// <param name="humanId"></param>
         /// <param name="bookId"></param>
         [HttpPost("{bookId}")]
-        public ActionResult<Models.BookDto> GetBook([FromBody] int humanId, [FromRoute] int bookId)
+        public ActionResult<Models.LibraryCard> GetBook([FromBody] int humanId, [FromRoute] int bookId)
         {
             try
             {
-                Models.BookDto result = Services.CardService.Add(Convert.ToInt32(humanId), Convert.ToInt32(bookId));
+                Models.LibraryCard result = Services.CardService.Add(Convert.ToInt32(humanId), Convert.ToInt32(bookId));
                 return result;
             }
             catch (Exceptions.BookTakenException ex)

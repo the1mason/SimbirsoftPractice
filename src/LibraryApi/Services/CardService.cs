@@ -7,7 +7,7 @@ namespace LibraryApi.Services
 {
     public static class CardService
     {
-        public static BookDto Add(int humanId, int bookId)
+        public static LibraryCard Add(int humanId, int bookId)
         {
             HumanDto h = Data.Storage.Humans.First(x => x.Id == humanId);
             BookDto b = Data.Storage.Books.First(x => x.Id == bookId);
@@ -24,7 +24,7 @@ namespace LibraryApi.Services
             }
             Data.Storage.LastCardId++;
             Data.Storage.Cards.Add(card);
-            return b;
+            return card;
         }
     }
 }
