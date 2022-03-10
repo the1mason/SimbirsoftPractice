@@ -55,6 +55,8 @@ namespace LibraryApi.Services
 
         public static void Delete(int id)
         {
+            if (Data.Storage.Cards.Any(x => x.Book.Id == id))
+                throw new Exceptions.EntityLinkedException("This book is not in the library! Delete library card first!");
             Data.Storage.Books.Remove(Data.Storage.Books.First(x => x.Id == id));
         }
     }

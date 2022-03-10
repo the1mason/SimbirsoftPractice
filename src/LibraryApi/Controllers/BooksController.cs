@@ -93,8 +93,8 @@ namespace LibraryApi.Controllers
         /// 1.4.3
         /// </summary>
         /// <param name="id"></param>
-        [HttpDelete]
-        public ActionResult DeleteBook(int? id)
+        [HttpDelete("{id}")]
+        public ActionResult DeleteBook([FromRoute] int? id)
         {
             if (id == null)
             {
@@ -105,6 +105,11 @@ namespace LibraryApi.Controllers
             {
                 Services.BookService.Delete(Convert.ToInt32(id));
                 return NoContent();
+            }
+            catch (Exceptions.EntityLinkedException ex)
+            {
+                _logger.LogInformation($"[{DateTime.UtcNow}] {HttpContext.Connection.RemoteIpAddress} -> 400 (entity linked)");
+                return BadRequest(ex.Message);
             }
             catch (InvalidOperationException)
             {

@@ -50,6 +50,10 @@ namespace LibraryApi.Services
 
         public static void Delete(int id)
         {
+            if (Data.Storage.Books.Any(x => x.AuthorId == id))
+                throw new Exceptions.EntityLinkedException("This human is an author with books! Delete books first.");
+            if (Data.Storage.Cards.Any(x => x.Human.Id == id))
+                throw new Exceptions.EntityLinkedException("This human has library card(s). Delete cards first.");
             Data.Storage.Humans.Remove(Data.Storage.Humans.First(x => x.Id == id));
         }
     }

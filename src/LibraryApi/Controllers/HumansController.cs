@@ -85,8 +85,8 @@ namespace LibraryApi.Controllers
         /// 1.3.3 - DELETE request for Humans
         /// </summary>
         /// <param name="id">id of user to delete</param>
-        [HttpDelete]
-        public ActionResult DeleteHuman(int? id)
+        [HttpDelete("{id}")]
+        public ActionResult DeleteHuman([FromRoute] int? id)
         {
             if (id == null)
             {
@@ -97,6 +97,11 @@ namespace LibraryApi.Controllers
             {
                 Services.HumanService.Delete(Convert.ToInt32(id));
                 return NoContent();
+            }
+            catch (Exceptions.EntityLinkedException ex)
+            {
+                _logger.LogInformation($"[{DateTime.UtcNow}] {HttpContext.Connection.RemoteIpAddress} -> 400 (entity linked)");
+                return BadRequest(ex.Message);
             }
             catch (InvalidOperationException)
             {
